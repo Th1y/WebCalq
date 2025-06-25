@@ -1,0 +1,109 @@
+/*basic reset*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-weight: 300;
+}
+
+p {
+    margin-bottom: 2rem;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Calculator Buttons Cointainer */
+.calculatorButtons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Result Display */
+#resultScreen {
+    width: 100%;
+    max-width: 300px;
+    height: 60px;
+    background-color: white;
+    margin-bottom: 15px;
+    padding: 15px;
+    text-align: right;
+    font-size: 1.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px
+    rgba(0,0,0,0.05)
+}
+
+/* Numeric Buttons */
+.numberButtons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+/* Operation Buttons */
+.actionButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Buttons Style */
+button {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px
+    rgba(0,0,0,0.05);
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+/* Customized Actions buttons */
+#addition, #subtraction, #multiplication, #division, #result {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  #addition:hover, #subtraction:hover, #multiplication:hover, #division:hover, #result:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Botão de apagar */
+  #clear {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  #clear:hover {
+    background-color: #c0392b;
+  }
