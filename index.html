@@ -8,34 +8,34 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <h1>WebCalq - A Modern Web Calculator</h1>
-    <p>Do the math</p>
-<!--for better organization there have 3 class: result, numbers and action buttons-->
-    <div id="resultScreen">0</div>
 
-<div class="calculatorButtons">
-    
-    <div class="numberButtons">
-        <button id="num1">1</button>
-        <button id="num2">2</button>
-        <button id="num3">3</button>
-        <button id="num4">4</button>
-        <button id="num5">5</button>
-        <button id="num6">6</button>
-        <button id="num7">7</button>
-        <button id="num8">8</button>
-        <button id="num9">9</button>
-        <button id="num0">0</button>
-    </div>
-    
-    <div class="actionButtons">
-            <button id="clear">C</button>
-            <button id="division">/</button>
-            <button id="multiplication">*</button>
-            <button id="subtraction">-</button>
-            <button id="addition">+</button>
-            <button id="result">=</button>
-    </div>
+<!-- Calculator grid -->
+<div class="calculator">
+    <input type ="text" class="display" readonly >
+
+    <!-- Exemplo com classes adicionadas -->
+<button id="clear">C</button>
+<button class="operator">/</button>
+
+<button class="number">7</button>
+<button class="number">8</button>
+<button class="number">9</button>
+
+<button class="operator">*</button>
+<button class="number">4</button>
+<button class="number">5</button>
+<button class="number">6</button>
+
+<button class="operator">-</button>
+<button class="number">1</button>
+<button class="number">2</button>
+<button class="number">3</button>
+
+<button class="operator">+</button>
+<button class="number">0</button>
+<button class="number">.</button>
+<button id="equal">=</button>
+
 </div>
 
     <script src="scripts/logic.js"></script>

@@ -6,104 +6,47 @@
     font-family:'Segoe UI', system-ui, sans-serif;
 }
 
-body {
-    background-color: #c2c2c2;
-    color: #333;
+body, html {
+    height: 100%;
+    background-color: #e0e0e0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
+    align-items: center;
 }
 
-h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
-    font-weight: 300;
-}
-
-p {
-    margin-bottom: 2rem;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-}
-
-/* Calculator Buttons Cointainer */
-.calculatorButtons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-/* Result Display */
-#resultScreen {
-    width: 100%;
-    max-width: 300px;
-    height: 60px;
-    background-color: white;
-    margin-bottom: 15px;
-    padding: 15px;
-    text-align: right;
-    font-size: 1.8rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px
-    rgba(0,0,0,0.05)
-}
-
-/* Numeric Buttons */
-.numberButtons {
+.calculator {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: minmax(60px, auto) repeat(6, 60px);
+    gap: 10px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-/* Operation Buttons */
-.actionButtons {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.display {
+    grid-column: span 4;
+    background: #222;
+    color: #0f0;
+    text-align: right;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-/* Buttons Style */
+#clear {
+    grid-column: span 3;
+}
+
+#equal {
+    grid-column: span 2;
+}
+
 button {
-    width: 60px;
-    height: 60px;
-    border: none;
-    border-radius: 8px;
-    background-color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 5px
-    rgba(0,0,0,0.05);
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f3f3f3;
 }
 
 button:hover {
-    background-color: #f0f0f0;
+    background-color: #ddd;
 }
-
-button:active {
-    transform: scale(0.95);
-}
-/* Customized Actions buttons */
-#addition, #subtraction, #multiplication, #division, #result {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  #addition:hover, #subtraction:hover, #multiplication:hover, #division:hover, #result:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Botão de apagar */
-  #clear {
-    background-color: #e74c3c;
-    color: white;
-  }
-  
-  #clear:hover {
-    background-color: #c0392b;
-  }

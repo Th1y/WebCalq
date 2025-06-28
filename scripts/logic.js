@@ -1,28 +1,29 @@
-// Selecting elements from the DOM
-const Display = document.getElementById('resultScreen');
-const numberButtons = document.querySelectorAll('.numberButtons button');
-const actionButtons = document.querySelectorAll('.actionButtons button:not(#result):not(#clear)');
-const equalButton = document.getElementById('result');
+// Select elements from the DOM
+const display = document.querySelector('.display');
+const numberButtons = document.querySelectorAll('.number');
+const operatorButtons = document.querySelectorAll('.operator');
+const equalButton = document.getElementById('equal');
 const clearButton = document.getElementById('clear');
 
-// Variables to store the calculator's state
-let currentInput = '0';
-let firstOperand = null;
-let operator = null;
-let waitingForSecondOperand = false;
+// Variables to store the calculator state
+let currentInput = '0';              // Current value shown on display
+let firstOperand = null;             // First number of the operation
+let operator = null;                 // Current operator (+, -, etc.)
+let waitingForSecondOperand = false; // Whether we are waiting for the second number
 
 // Update the display with the current input
 function updateDisplay() {
-    Display.textContent = currentInput;
+    display.value = currentInput;
 }
 
-// Handle numeric input
-function inputNumber(number) {
+// Handle number and dot input
+function inputNumber(value) {
     if (waitingForSecondOperand) {
-        currentInput = number;
+        currentInput = value; // Replace the value
         waitingForSecondOperand = false;
     } else {
-        currentInput = currentInput === '0' ? number : currentInput + number;
+        // Replace if it's 0, otherwise append
+        currentInput = currentInput === '0' ? value : currentInput + value;
     }
 }
 
@@ -31,39 +32,34 @@ function handleOperator(nextOperator) {
     const inputValue = parseFloat(currentInput);
 
     if (operator && waitingForSecondOperand) {
-        operator = nextOperator;
+        operator = nextOperator; // Replace operator
         return;
     }
 
     if (firstOperand === null) {
-        firstOperand = inputValue;
+        firstOperand = inputValue; // Store the first number
     } else if (operator) {
         const result = calculate(firstOperand, inputValue, operator);
-        currentInput = String(result);
-        firstOperand = result;
+        currentInput = String(result);  // Show the result
+        firstOperand = result;         // Store it for chaining
     }
 
-    waitingForSecondOperand = true;
     operator = nextOperator;
+    waitingForSecondOperand = true;
 }
 
 // Perform the calculation
-function calculate(firstOperand, secondOperand, operator) {
+function calculate(first, second, operator) {
     switch (operator) {
-        case '+':
-            return firstOperand + secondOperand;
-        case '-':
-            return firstOperand - secondOperand;
-        case '*':
-            return firstOperand * secondOperand;
-        case '/':
-            return secondOperand === 0 ? 'Error' : firstOperand / secondOperand;
-        default:
-            return secondOperand;
+        case '+': return first + second;
+        case '-': return first - second;
+        case '*': return first * second;
+        case '/': return second === 0 ? 'Error' : first / second;
+        default: return second;
     }
 }
 
-// Reset the calculator to its initial state
+// Reset calculator to its initial state
 function resetCalculator() {
     currentInput = '0';
     firstOperand = null;
@@ -71,7 +67,7 @@ function resetCalculator() {
     waitingForSecondOperand = false;
 }
 
-// Add event listeners for number buttons
+// Add event listeners to number buttons
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         inputNumber(button.textContent);
@@ -79,36 +75,34 @@ numberButtons.forEach(button => {
     });
 });
 
-// Add event listeners for operator buttons
-actionButtons.forEach(button => {
+// Add event listeners to operator buttons
+operatorButtons.forEach(button => {
     button.addEventListener('click', () => {
         handleOperator(button.textContent);
         updateDisplay();
     });
 });
 
-// Add event listener for equal button
+// Event listener for equal button
 equalButton.addEventListener('click', () => {
-    if (operator === null || waitingForSecondOperand) {
-        return;
-    }
+    if (operator === null || waitingForSecondOperand) return;
 
     const inputValue = parseFloat(currentInput);
     const result = calculate(firstOperand, inputValue, operator);
 
     currentInput = isNaN(result) ? 'Error' : String(result);
-    firstOperand = null;
     operator = null;
+    firstOperand = null;
     waitingForSecondOperand = false;
 
     updateDisplay();
 });
 
-// Add event listener for clear button
+// Event listener for clear button
 clearButton.addEventListener('click', () => {
     resetCalculator();
     updateDisplay();
 });
 
-// Initialize display
+// Initialize the display with default value
 updateDisplay();
