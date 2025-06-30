@@ -22,6 +22,7 @@ body, html {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
+    box-shadow 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .display {
@@ -31,6 +32,8 @@ body, html {
     text-align: right;
     padding: 10px;
     border-radius: 5px;
+    border: none;
+    font-size: 2em;
 }
 
 #clear {
@@ -45,6 +48,10 @@ button {
     padding: 10px;
     border-radius: 5px;
     background-color: #f3f3f3;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 1.2em;
 }
 
 button:hover {
