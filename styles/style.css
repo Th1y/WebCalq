@@ -36,14 +36,6 @@ body, html {
     font-size: 2em;
 }
 
-#clear {
-    grid-column: span 3;
-}
-
-#equal {
-    grid-column: span 2;
-}
-
 button {
     padding: 10px;
     border-radius: 5px;
@@ -56,4 +48,29 @@ button {
 
 button:hover {
     background-color: #ddd;
+}
+
+/* Toggle theme (Dark mode) */
+body.dark, html.dark {
+    background-Color: #121212;
+    color:#f0f0f0;
+}
+
+body.dark .calculator {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 10px rgba (0, 0, 0, 0.6);
+}
+
+body.dark .display {
+    background: #000;
+    color: #0f0;
+}
+
+body.dark button {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark button:hover {
+    background-color: #444;
 }
