@@ -22,11 +22,22 @@ function updateDisplay() {
 // Handle number and dot input
 function inputNumber(value) {
     if (waitingForSecondOperand) {
-        currentInput = value; // Replace the value
+        currentInput = value === '.' ? '0.' : value;
         waitingForSecondOperand = false;
+        return;
+    }
+
+    if (value === '.') {
+        if (!currentInput.includes('.')) {
+            currentInput += '.';
+        }
+        return;
+    }
+
+    if (currentInput === '0') {
+        currentInput = value;
     } else {
-        // Replace if it's 0, otherwise append
-        currentInput = currentInput === '0' ? value : currentInput + value;
+        currentInput += value;
     }
 }
 
