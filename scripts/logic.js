@@ -40,6 +40,7 @@ function handleOperator(nextOperator) {
         firstOperand = inputValue; // Store the first number
     } else if (operator) {
         const result = calculate(firstOperand, inputValue, operator);
+        currentInput = isNaN(result) ? 'Error' : String(result); // Handle error (e.g. divide by zero)
         currentInput = String(result);  // Show the result
         firstOperand = result;         // Store it for chaining
     }
@@ -104,5 +105,34 @@ clearButton.addEventListener('click', () => {
     updateDisplay();
 });
 
+// Keyboard support
+window.addEventListener('keydown', (e)=> {
+    e.preventDefault(); // Prevent default browser behavior (e.g., form submission)
+    
+    const key = e.key; // Get the key that was pressed
+    
+    if (!isNaN(key) || key === '.') {
+        // If the key is a number or decimal point, process as number input
+        inputNumber (key);
+        updateDisplay();
+    }
+
+    if (["+", "-", "*", "/"].includes(key)) {
+         // If key is a valid operator, process it
+        handleOperator(key);
+        updateDisplay();
+    }
+
+    if (key === '=' || key === 'Enter') {
+         // Equal or Enter triggers calculation
+        equalButton.click();
+    }
+
+    if (key.toLowerCase() === 'c') {
+        // Pressing 'c' resets the calculator
+        clearButton.click();
+    }
+});
+
 // Initialize the display with default value
-updateDisplay();
+updateDisplay(); // Show "0" at the start
