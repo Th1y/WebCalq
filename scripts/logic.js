@@ -43,7 +43,19 @@ function inputNumber(value) {
 
 // Handle operator input
 function handleOperator(nextOperator) {
-    const inputValue = parseFloat(currentInput);
+    let inputValue = parseFloat(currentInput);
+
+    // √ operator: apply square root to input before proceeding
+    if (operator === '√') {
+        if (inputValue < 0 || isNaN(inputValue)) {
+            currentInput = 'Error';
+            updateDisplay();
+            return;
+        }
+        inputValue = Math.sqrt(inputValue);
+        currentInput = String(inputValue);
+        operator = null; // Clear root operator after application
+    }
 
     if (operator && waitingForSecondOperand) {
         operator = nextOperator; // Replace operator
@@ -69,6 +81,7 @@ function calculate(first, second, operator) {
         case '-': return first - second;
         case '*': return first * second;
         case '/': return second === 0 ? 'Error' : first / second;
+        case '√': return second < 0 ? 'Error' : Math.sqrt(second); // Not used directly anymore
         default: return second;
     }
 }
@@ -99,6 +112,16 @@ operatorButtons.forEach(button => {
 
 // Event listener for equal button
 equalButton.addEventListener('click', () => {
+    if (operator === '√') {
+        const value = parseFloat(currentInput);
+        currentInput = value < 0 || isNaN(value) ? 'Error' : String(Math.sqrt(value));
+        firstOperand = null;
+        operator = null;
+        waitingForSecondOperand = false;
+        updateDisplay();
+        return;
+    }
+
     if (operator === null || waitingForSecondOperand) return;
 
     const inputValue = parseFloat(currentInput);
@@ -148,12 +171,11 @@ percentageButton.addEventListener('click', () => {
     }
 });
 
-
 // Event listener for square root button
 squareRootButton.addEventListener('click', () => {
-    const value = parseFloat(currentInput);
-    currentInput = value < 0 || isNaN(value) ? 'Error' : String(Math.sqrt(value));
-    updateDisplay();
+    // Set root operator and wait for next input
+    operator = '√';
+    waitingForSecondOperand = true;
 });
 
 // Keyboard support
